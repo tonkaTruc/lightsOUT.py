@@ -23,7 +23,7 @@ import sys
 # This can be left to the BASH script and resulting text files imported
 # into main_lightsOUT.py
 
-def mainMenu():																			# Display lightsOUT main menu
+def mainMenu():																				# Display lightsOUT main menu
 	if usrOS == "win":
 		os.system('cls')
 	elif usrOS == "linux":
@@ -38,8 +38,7 @@ def mainMenu():																			# Display lightsOUT main menu
 
 	options = sorted(menu_MAIN.keys())
 	for entry in options:
-		print(entry, menu_MAIN[entry])
-	
+		print(entry, menu_MAIN[entry])	
 	ans = input("\nPlease select an option: ")
 	if ans == "1":
 		testList()
@@ -53,7 +52,7 @@ def mainMenu():																			# Display lightsOUT main menu
 		mainMenu()
 print(50 * '-')
 
-def testList():																			# Display automated test list and run from here
+def testList():																					# Display automated test list and run from here
 	print ('\n' + 50 * '-' + ' Automated Test Menu')
 
 	testMenu = {}
@@ -80,39 +79,41 @@ def testList():																			# Display automated test list and run from her
 		time.sleep(2)
 		mainMenu()
 
-def mrPing():																			# run "mrPing" script from here
+def mrPing():																						# run "mrPing" script from here
 	print('\n' + 20 * '+ ' + 'Inside \"mrPing()\"\n')
 	print('--- Display system patchCount and \"ping\" output ---')
 	print('\n' + 20 * '+ ' + 'Leaving \"mrPing()\"\n')
 
-def sysConfig():																		# run "config.sh" from here
+def sysConfig():																				# run "config.sh" from here
 	print('\n' + 20 * '+ ' + 'Inside \"sysConfig()\"')
+	
 	lastKnownDeskID = os.path.join("sys", "deskIDs.txt")
 	print(lastKnownDeskID)
 
-	print('\nDesk Level: \tDeskID: \tDeskIO:\n')
-	
 	f = open(lastKnownDeskID)
 	lastDeskIDs = f.readline()
 	deskIDs = lastDeskIDs.split()
 	f.close()
-		
-	for count, ID in enumerate(deskIDs):
-		IOfile = open(os.path.join('sys', 'deskIO', ID + '-IO.txt'))
-#		print('IO file = ' + str(IOfile))
-#		IOfile = open(str('sys\\deskIO\\' + ID + '-IO.txt'))
-		lastKnownIO = IOfile.readline()
-		IOfile.close()
-		
-		print('    ' + str(count) + '\t\t' + ID + '\t\t' + lastKnownIO)
 	
-	print('\nIs this configuration correct? <Yes> / <No>')
-	loadConf=input('- ')
+	try:	
+		print('\nDesk Level: \tDeskID: \tDeskIO:\n')
+		for count, ID in enumerate(deskIDs):
+			IOfile = open(os.path.join('sys', 'deskIO', ID + '-IO.txt'))
+			lastKnownIO = IOfile.readline()
+			IOfile.close()
+			print('    ' + str(count) + '\t\t' + ID + '\t\t' + lastKnownIO)
+		
+		print('\nIs this configuration correct? <Yes> / <No>')
+		loadConf=input('- ')
+		
+	except FileNotFoundError:	
+		print('Missing file(s) in config folders... running first time system config script')
+		quit()																						# Insert first time configuration script in place of "quit()"
 	
 	if (loadConf == 'Yes') or (loadConf == 'yes'):
 		print('Configuration is correct. Returning to the main menu...')
 		time.sleep(2)
-		mainMenu()																		# Need to break here instead of recursive "mainMenu()"
+		mainMenu()																				# Need to break here instead of recursive "mainMenu()"
 	elif (loadConf == 'No') or (loadConf== 'no'):
 		print('- User answered \"No\", begin system configuration...')
 	else:
