@@ -26,7 +26,7 @@ import sys
 def mainMenu():																			# Display lightsOUT main menu
 	if usrOS == "win":
 		os.system('cls')
-	elif os == "linux":
+	elif usrOS == "linux":
 		os.system('clear')
 		
 	print (50 * '-' + ' Enter lightsOUT.py')
@@ -87,8 +87,9 @@ def mrPing():																			# run "mrPing" script from here
 
 def sysConfig():																		# run "config.sh" from here
 	print('\n' + 20 * '+ ' + 'Inside \"sysConfig()\"')
-	lastKnownDeskID = "sys\deskIDs.txt"
-	
+	lastKnownDeskID = os.path.join("sys", "deskIDs.txt")
+	print(lastKnownDeskID)
+
 	print('\nDesk Level: \tDeskID: \tDeskIO:\n')
 	
 	f = open(lastKnownDeskID)
@@ -97,7 +98,9 @@ def sysConfig():																		# run "config.sh" from here
 	f.close()
 		
 	for count, ID in enumerate(deskIDs):
-		IOfile = open(str('sys\\deskIO\\' + ID + '-IO.txt'))
+		IOfile = open(os.path.join('sys', 'deskIO', ID + '-IO.txt'))
+#		print('IO file = ' + str(IOfile))
+#		IOfile = open(str('sys\\deskIO\\' + ID + '-IO.txt'))
 		lastKnownIO = IOfile.readline()
 		IOfile.close()
 		
