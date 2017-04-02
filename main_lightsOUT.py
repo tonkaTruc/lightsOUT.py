@@ -1,7 +1,10 @@
 import os
+import telnetlib
 import time
+import ctrl
 import os.path
 import sys
+import calrecTelnet
 # Function - "editSimBoxes"
 # A function that will telnet into a specified deskID
 # and work with the telnet commands "asb" / "rsb"
@@ -34,7 +37,8 @@ def mainMenu():																				# Display lightsOUT main menu
 	menu_MAIN['1'] = "List Available Automated Tests"
 	menu_MAIN['2'] = "Display Current System (ping / patchCount)"
 	menu_MAIN['3'] = "Configure lightsOUT"
-	menu_MAIN['4'] = "- Exit lightsOUT"
+	menu_MAIN['4'] = "Test lightsOUT"
+	menu_MAIN['5'] = "- Exit lightsOUT"
 
 	options = sorted(menu_MAIN.keys())
 	for entry in options:
@@ -47,10 +51,14 @@ def mainMenu():																				# Display lightsOUT main menu
 	elif ans == "3":
 		sysConfig()
 	elif ans == "4":
+		print(10 * "-" + ' ENTER TEST MODE')
+		deskID = input('Enter deskID to test: ')
+		sendCmd = input('Enter system command: ')
+		print('\n' + calrecTelnet.sendCmd(deskID, sendCmd))					# This will display the return value of calrecTelnet.py i.e should be the result of the test
+	elif ans == "5":
 		quit()
 	else:
 		mainMenu()
-print(50 * '-')
 
 def testList():																					# Display automated test list and run from here
 	print ('\n' + 50 * '-' + ' Automated Test Menu')
