@@ -3,7 +3,7 @@ import sys
 import time
 import ctrl
 
-def sendCmd(deskID, sysCmd):
+def sendApolloCmd(deskID, isModule, sysCmd, sysCmdVar):
 
 	# Telnet protocol characters (don't change)
 	IAC  = chr(255) # "Interpret As Command"
@@ -14,48 +14,32 @@ def sendCmd(deskID, sysCmd):
 	theNULL = chr(0)
 	LINEMODE = chr(34) 			# Linemode option
 
-	print(5 * "-" + ' Connecting to core addr: ' + deskID)
-	print(5 * "-" + ' Sending command: ' + sysCmd)
-
-	HOST="localhost"
-	#HOST = deskID
-	PORT=55555
-
-	print('Debug 1')
-	# Print out variables to be used when connecting
-	print('------------------------------------ Connection variables:')
-	print('HOST: ' + HOST)
-	print('PORT: ' + str(PORT))
-
-	# Make the connection and read back to client terminal
-	print('------------------------------------ Making connection:')
-	# creating new socket
+# Set Telnet port depending on module type
+	HOST = deskID
+	if (isModule == "mcs"):
+		PORT=4444
+	elif (isModule == "router"):
+		PORT=55555
+# Create Telnet socket
 	tn=telnetlib.Telnet(HOST, PORT, timeout = 1)
-	print("----- Socket created.")
-
-	# Connect to remote host socket + host port
+# Connect to remote host socket + host port
+# Send IAC WONT LINEMODE to force telnet session into "mode char"
 	try: 
 		tn.sock.send(telnetlib.IAC + telnetlib.WONT + telnetlib.LINEMODE)
 		time.sleep(1)
 	except socket.error as msg:
 		print("Connection failed w/ error code: " + str(msg[0]) + " Message: " + msg[1])
 		sys.exit()
-	print("----- Socket connection complete")
-	print("----- Send data over socket to: " + HOST + ":" + str(PORT) + "\n")
-	
-	COMMAND = sysCmd.encode('utf-8')
-
-	print('Sending ' + str(COMMAND) + " to telnet...\n")
-	tn.write(COMMAND + b'\r')
+# Write the contents of sysCmd to telnet session and read back the result
+	COMMAND = str(sysCmd + ' ' + sysCmdVar).encode('utf-8')
+#	print('Sending CMD: ' + str(COMMAND))
+	NEWLINE = str("\r").encode('utf-8')
+	tn.write(COMMAND + NEWLINE)
+#	tn.write(sysCmd.encode('utf-8'))
 	time.sleep(1)	
 	RESULT=tn.read_very_eager().decode('utf-8')
-	print(RESULT)
-	
-	print('\n------------------------------------ Connection established:')
-
-	print('closing socket')
 	tn.close()
-	return(5 * "-" + ' From sendTelnet: ' + RESULT)
+	return(RESULT)
 
 if __name__ == '__main__':
-		sendCmd()
+		sendApolloCmd()
