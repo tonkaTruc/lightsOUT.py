@@ -6,6 +6,7 @@ import ctrl
 import os.path
 import sys
 import calrecTelnet
+import dBconnect
 
 lastKnownDeskID = os.path.join("sys", "deskIDs.txt")
 f = open(lastKnownDeskID)
@@ -58,11 +59,10 @@ def testList():																												# Display automated test list and run
 		#	parseApollo(isMasterRouter, "spc", calrecTelnet.sendApolloCmd(deskIDs[0] + ".5.0", "router", "spc", " "))
 			time.sleep(2)
 			print('\nTest Result = <PASS/FAIL>')
-			time.sleep(2)
-			
-	elif usrTest == "3":
+			time.sleep(2)		
+	elif usrTest == "3":																									# Run Router AutoPromotion tests for all cores
 		print('Running ' + testMenu[usrTest] + (' tests'))
-	elif usrTest == "4":
+	elif usrTest == "4":																									# Return user to main menu
 		print('Returning to main menu...')
 		time.sleep(2)
 		mainMenu()
@@ -152,10 +152,6 @@ def editSimBoxes(deskID, addRm, HID, gigE, rate):														# A function that
 	calrecTelnet.sendApolloCmd(deskID + ".5.0", "router", addRm, HID + ' ' + gigE + ' ' + rate)																				# deskID, isModule, sysCmd, sysCmdVar):
 #	calrecTelnet.sendApolloCmd(deskID + ".6.0", "router", addRm, HID + ' ' + gigE + ' ' + rate)																				# deskID, isModule, sysCmd, sysCmdVar):
 
-	
-#	calrecTelnet.sendApolloCmd(deskID, module, sendCmd)
-
-
 # Function - "gatherLogs"
 # A function to gather all appropriate logs from deskID under test AND 
 # the master router
@@ -214,7 +210,5 @@ if __name__ == "__main__":																# If ran as main script, default to "m
 		usrOS = "linux"
 	print(5 * "-" + " Please wait...") 
 	time.sleep(1)
-	
 	mainMenu()
-#	sysConfig()
 
