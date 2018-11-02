@@ -1,0 +1,71 @@
+#class ISignalAnalyzer(DispatchBaseClass):
+
+SA_ChARMSAmpl	= Channel A RMS value
+SA_ChBRMSAmpl	= Channel B RMS value
+SA_ChAFreq      = Channel A Frequency
+SA_ChBFreq      = Channel B Frequency
+SA_Gain         = Gain level
+SA_Phase        = Phase
+SA_PhaseUnit    = Phase Unit Selection
+SA_FreqUnit     = Frequency Unit 
+SA_Source		= Analyser source ("Digital" = 0 / "Analogue" = 1)
+
+
+#class IDigitalOutputs(DispatchBaseClass):
+
+DO_CHANNELCHECK_24BITS  = 24 Bit Channel Test
+DO_CHANNELCHECK_20BITS  = 20 Bit Channel Test
+DO_CHANNELCHECK_16BITS  = 16 Bit Channel Test
+DO_MuteChA              = Channel A Mute
+DO_MuteChB              = Channel B Mute
+ChannelCheckFailedChA   = Channel Check A Fail
+ChannelCheckFailedChB   = Channel Check B Fail
+DO_FRAMERATE_48000      = 48k Digital Frame Rate
+DO_FRAMERATE_96000      = 96k Digital Frame Rate
+DO_UserBitCheck         = User Bit Check
+DO_VBIT_INVALID         = Invalidity Bit Check
+DO_VBIT_VALID           = Validity bit check
+DO_Wordlength           = Wordlength 24 bits
+DO_SOURCE_GEN           = Source - Generator
+DO_RefSyncSource        = Reference Sync
+DO_RefSyncFrameRate     = Reference Sync Frame Rate
+
+
+
+
+# Signal Generator
+SG_ChAAmpl				= Channel A Amplitude
+SG_ChBAmpl				= Channel B Amplitude
+SG_ChAAmplUnit          = Channel A Unit
+SG_ChBAmplUnit          = Channel B Unit
+SG_ChAFreq              = Channel A Frequency Generator
+SG_ChBFreq              = Channel B Frequency 
+SG_ChAFreqUnit          = Channel A Frequency Unit
+SG_ChBFreqUnit          = Channel B Frequency Unit
+SG_GENMODE_SPLIT        = Channel Split Generator Mode
+SG_GENMODE_TIED         = Channel Tied Generator Mode
+SG_Gain                 = Channel Gain
+SG_GainUnit             = Channel Gain Unit
+
+
+
+
+
+#class IDigitalInputs(DispatchBaseClass):
+DI_SOURCE_BNC           = Digital Input Source BNC
+
+
+#class IChannelStatusStream(DispatchBaseClass):
+CS_Byte0                = 48K -Professional Use
+CS_CRCMode              = CRC Mode - correct
+CS_Byte2                = Wordlength - 24 Bits
+
+
+#class ICTDetector(DispatchBaseClass):
+
+CTD_ChA                 = Continuous Time Detector THD
+CTD_ChB                 = Continuous Time Detectctor THD
+CTD_Unit                = Continuous Time Detector THD
+
+
+CTD_Function                                                                                                                                                                     

@@ -1,0 +1,30 @@
+[LightsOUT]
+main_base_directory = C:/Users/tommys/Documents/_Project info/lightsOUT
+log_location = C:/Users/tommys/Documents/_Project info/lightsOUT/logs
+
+[Core]
+no_of_surfaces = 1
+MDR_ip = 1.1.1.1
+ROUTER_ip = 192.168.5.0
+
+[Stream_Manager]
+stream_manager_addr = https://private-ea34d-calrecsmb.apiary-mock.com
+stream_manager_port = 5678
+stream_manager_nic = enp39s0
+
+[Audio_Network]
+control_addr = 172.16.255.100
+control_port = 50002
+audio_network_nic = Audio
+
+capture_time = 5
+cap_directory = /home/tsutton/Documents/lightsOUT_v2/pcaps
+
+[Bach]
+bach_addr_mgmt = 192.168.1.2
+bach_addr_data = 192.168.0.2
+ptime = 1000
+
+[GUI]
+assist_url = 1.1.1.1
+script_dir = /home/tsutton/Documents/lightsOUT_v2/gui_test_scripts
